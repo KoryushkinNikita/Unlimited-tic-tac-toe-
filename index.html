@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="keywords" content="game" />
+  <meta name="description" content="Unlimited tic-tac-toe" />
+  <link href="css/index.css" rel="stylesheet" type="text/css" />
+
+  <title>Tic-Tac-Toe</title>
+</head>
+
+<body class="body">
+  <!--Игровое поле-->
+  <div id="gameField" class="gameField">
+    <table id="gameTable" class="gameTable">
+        <tbody>
+        </tbody>
+    </table>
+  </div>
+  <!--Игровое поле-->
+  <!--Начальная страница-->
+  <div class="startField flex" id="startField">
+    <label id="inputLabel" class="inputLabel">Введите имена игроков</label>
+    <div id="inputDiv" class="inputDiv">
+      <input type="text" id="firstPlayerInput" class="firstPlayerInput">
+      <input type="text" id="secondPlayerInput" class="secondPlayerInput">
+    </div>
+    <button type="button" id="startButton" class="startButton">Старт</button>
+    <button type="button" id="restartButton" class="startButton" hidden>Начать заново</button>
+  </div>
+  <!--Начальная страница-->
+  <!--Информация для вывода о победителе-->
+  <div class="serviceText" id="serviceText" hidden></div> 
+  <!--Информация для вывода о победителе-->
+<script src="js/index.js"></script>
+</body>
+
+</html>
