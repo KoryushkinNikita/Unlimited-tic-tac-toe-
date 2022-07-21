@@ -4,22 +4,19 @@
 */
 (function(){
     let rows = 30;
-
     let columns = 30;
-    
     let player = 1;
 
     const gameField = document.getElementById('gameField');
-
     const gameTable = document.getElementById('gameTable').getElementsByTagName('tbody')[0];
 
 
     //Заполнение таблицы ячейками
     function fillGameTable() {
         for (let i = 0; i < rows; i++){
-            let tr = document.createElement('tr');
+            const tr = document.createElement('tr');
             for (let j = 0; j < columns; j++){
-                let td = document.createElement('td');
+                const td = document.createElement('td');
                 tr.appendChild(td);
             }
             gameTable.appendChild(tr);
@@ -28,9 +25,9 @@
     //Функция вставки строки в конец таблицы
     function addRowToTheEnd(){
         for (let j = 0; j < 5; j++){
-            let tr = document.createElement('tr');
+            const tr = document.createElement('tr');
                 for (let j = 0; j < columns; j++){
-                    let td = document.createElement('td');
+                    const td = document.createElement('td');
                     tr.appendChild(td);
                 }
                 gameTable.appendChild(tr);
@@ -41,9 +38,9 @@
     //Функция вставки строки в начало таблицы
     function addRowAfterBeggining(){
         for (let i = 0; i < 5; i++){
-            let tr = document.createElement('tr');
+            const tr = document.createElement('tr');
             for (let j = 0; j < columns; j++){
-                let td = document.createElement('td');
+                const td = document.createElement('td');
                 tr.appendChild(td);
             }
             gameTable.insertAdjacentElement('afterbegin',tr); 
@@ -55,7 +52,7 @@
     function addColumnToTheEnd(){
         for (let i = 0; i < rows; i++){
             for (let j = 0; j < 5; j++){
-                let td = document.createElement('td');
+                const td = document.createElement('td');
                 gameTable.rows[i].appendChild(td);
             }
             
@@ -67,7 +64,7 @@
     function addColumnAfterBeggining(){
         for (let i = 0; i < rows; i++){
             for (let j = 0; j < 5; j++){
-                let td = document.createElement('td');
+                const td = document.createElement('td');
                 gameTable.rows[i].insertAdjacentElement('afterbegin', td);
             }
         }
@@ -185,18 +182,27 @@
         return false;
     }
 
+    const firstPlayer = document.getElementById('firstPlayerInput');
+    if (firstPlayer.value == "") firstPlayer.value = 'Player1';
+    const secondPlayer = document.getElementById('secondPlayerInput');
+    if (secondPlayer.value == "") secondPlayer.value = 'Player2';
+    const startButton = document.getElementById('startButton');
+    const inputLabel = document.getElementById('inputLabel');
+    const restartButton = document.getElementById('restartButton');
+    const serviceText = document.getElementById('serviceText');
+    
     //Клик на ячейку таблицы
     gameTable.onclick = (event) => {
-        cell = event.target;
-        rowNumber = cell.parentNode.rowIndex;
-        columnNumber = cell.cellIndex;
+        const cell = event.target;
+        const rowNumber = cell.parentNode.rowIndex;
+        const columnNumber = cell.cellIndex;
         if (checkCorners(rowNumber, columnNumber)) {makeTableWider(rowNumber, columnNumber);}
         if (player == 1) { //Проверка если первый игрок(крестик)
             if (cell.innerText == ''){
                 cell.classList  += 'red-cross';
                 cell.innerText = 1;
                 if (checkWin(rowNumber, columnNumber, player)){
-                    gameField.hidden = true;  // сюда тоже можно бахнуть сет таймаут так-то
+                    gameField.hidden = true; 
                     serviceText.innerText = `${firstPlayer.value} win!`;
                     serviceText.hidden = false;
                     restartButton.hidden = false;
@@ -222,14 +228,6 @@
             
         }
     }   
-    const firstPlayer = document.getElementById('firstPlayerInput');
-    if (firstPlayer.value == "") firstPlayer.value = 'Player1';
-    const secondPlayer = document.getElementById('secondPlayerInput');
-    if (secondPlayer.value == "") secondPlayer.value = 'Player2';
-    const startButton = document.getElementById('startButton');
-    const inputLabel = document.getElementById('inputLabel');
-    const restartButton = document.getElementById('restartButton');
-    const serviceText = document.getElementById('serviceText');
     
     //Нажатие на кнопку старт, создание таблицы, скрытие ненужных элементов
     startButton.addEventListener('click', function(){
